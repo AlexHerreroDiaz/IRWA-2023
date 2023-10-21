@@ -8,6 +8,7 @@ This section covers the preprocessing of text data. It includes:
 
 - Mounting Google Drive using the Colab library.
 - Loading essential Python packages such as NLTK for natural language processing and text analysis.
+- Loading the dataset from the csv files at the `\IRWA_data_2023` directory
 - Defining a function, `split_hashtag_words`, to handle hashtags with multiple words.
 - Creating a function, `build_terms`, to preprocess text by removing stop words, stemming, transforming to lowercase, and returning a list of tokens.
 - A function, `get_data_ids`, retrieves document IDs for each tweet.
