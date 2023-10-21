@@ -1,6 +1,4 @@
-Here's a README.md file for your notebook, summarizing the content and providing information on the steps and code used:
-
-# Notebook Title: Text Processing and Exploratory Data Analysis
+# Text Processing and Exploratory Data Analysis
 
 ## Part 1 - Text Processing
 
@@ -26,4 +24,4 @@ In this section, you perform an exploratory data analysis, including:
 - Generating a WordCloud visualization for the most frequent tokens.
 - Utilizing the spaCy NLP model to extract the top 10 most frequent entities and their types.
 
-The code is well-documented and provides examples to illustrate each step. This notebook serves as a comprehensive guide for text processing.
+The code is well-documented and provides examples to illustrate each step. This notebook serves as a comprehensive guide for text processing and Exploratory Data Analysis.
