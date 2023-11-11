@@ -1,4 +1,4 @@
-# Ranking and Evaluation of Tweets - Notebook Overview
+# Ranking - Notebook Overview
 
 This notebook focuses on the ranking and evaluation of tweets related to the Russia-Ukraine conflict. The ranking is performed using two different approaches: **Social-Score + Cosine Similarity** and **Word2Vec + Cosine Similarity**. Additionally, there is a report of the remaining sections.
 
