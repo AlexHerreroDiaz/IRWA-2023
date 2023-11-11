@@ -1,44 +1,31 @@
-# Indexing and Evaluation of Tweets - Notebook Overview
+# Ranking and Evaluation of Tweets - Notebook Overview
 
-This notebook implements a system to index and evaluate a collection of tweets related to the Russia-Ukraine conflict. The system consists of several components: preprocessing the tweet data, building an inverted index using TF-IDF, querying the index, and evaluating the performance using various metrics.
+This notebook focuses on the ranking and evaluation of tweets related to the Russia-Ukraine conflict. The ranking is performed using two different approaches: **Social-Score + Cosine Similarity** and **Word2Vec + Cosine Similarity**. Additionally, there is a report of the remaining sections.
 
 ## Group Members
-
-- **Guillem Gauchia Torres** - 240215 - u186410
-- **Àlex Herrero Díaz** - 240799 - u186402
-- **Adrià Julià Parada** - 242195 - u188319
+- Guillem Gauchia Torres - 240215 - u186410
+- Àlex Herrero Díaz - 240799 - u186402
+- Adrià Julià Parada - 242195 - u188319
 
 ## Overview
 
-The Notebook is structured as follows:
+The notebook is structured into two main sections:
 
-### 1. Data Pre-processing
+### 1. Social-Score + Cosine Similarity Ranking
 
-- **Text Preprocessing**: Utilizes techniques such as removing stopwords, stemming, and tokenization for the tweets.
+In this section, a ranking method called "Social-Score" is implemented. This method considers social parameters such as Likes, Retweets, and Followers. The ranking is based on both Cosine Similarity and Euclidean Distance, providing a balanced approach. The top-ranked tweets are displayed along with their associated social parameters.
 
-### 2. Indexing and TF-IDF Computation
+### 2. Word2Vec + Cosine Similarity Ranking
 
-- **Building the Inverted Index**: Constructs an inverted index using TF-IDF techniques to facilitate efficient querying of tweets.
-
-### 3. Querying the Index
-
-- **Ranking Documents**: Ranks the documents based on a search query using the TF-IDF weights.
-
-### 4. Evaluation of Search Results
-
-- **Evaluation Metrics**: Computes several evaluation metrics including Precision, Recall, F1-Score, Mean Average Precision, Mean Reciprocal Rank, and Normalized Discounted Cumulative Gain.
-
-### 5. Visualization
-
-- **T-SNE Visualization of Tweets**: Provides a 2D visualization of tweets based on their TF-IDF vectors using t-SNE.
+This section utilizes Word2Vec embeddings to represent tweets as vectors. The ranking is based on the cosine similarity between the query and the tweet vectors. Pre-trained Word2Vec models are used for vector representation. The top 20 ranked tweets for specific queries are printed with their original content.
 
 ## Files and Data
 
-- **Input Data**: Loading tweet data from a JSON file.
-- **Evaluation Ground Truth**: Evaluation file to compare search results and ground truth.
+- **Input Data:** Tweet data is loaded from a JSON file.
+- **Evaluation Ground Truth:** An evaluation file is used to compare search results with the ground truth.
 
 ## How to Use the Notebook
 
-- **Load Data**: Mount Google Drive and load the necessary data for indexing and evaluation.
-- **Run Functions**: Execute functions for preprocessing, index creation, querying, and evaluation.
-- **Evaluate Performance**: Check evaluation metrics such as Precision, Recall, and more.
+1. **Load Data:** Mount Google Drive and load the required data for indexing and evaluation.
+2. **Run Functions:** Execute functions for preprocessing, indexing, querying, and evaluation.
+3. **Evaluate Performance:** Check evaluation metrics such as Precision, Recall, and more.
