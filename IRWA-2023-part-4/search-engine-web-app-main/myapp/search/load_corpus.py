@@ -208,7 +208,8 @@ def load_tweets_as_documents(path, num_documents=4000):
             doc_date = tweet_data['created_at']
             likes = tweet_data['favorite_count']
             retweets = tweet_data['retweet_count']
-            url = f"https://twitter.com/twitter_username/status/{tweet_data['id_str']}"
+            
+            url = f"https://twitter.com/{tweet_data['user']['name']}/status/{tweet_data['id_str']}"
             hashtags = [hashtag['text'] for hashtag in tweet_data['entities']['hashtags']]
 
             terms, line = build_terms(description)

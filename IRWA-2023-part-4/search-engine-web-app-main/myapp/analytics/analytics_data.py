@@ -4,23 +4,26 @@ import random
 
 class AnalyticsData:
     """
-    An in memory persistence object.
+    An in-memory persistence object.
     Declare more variables to hold analytics tables.
     """
-    # statistics table 1
-    # fact_clicks is a dictionary with the click counters: key = doc id | value = click counter
-    fact_clicks = dict([])
-
-    # statistics table 2
-    fact_two = dict([])
-
-    # statistics table 3
-    fact_three = dict([])
+    def __init__(self):
+        self.fact_clicks = dict([])
+        self.fact_two = dict([])
+        self.fact_three = dict([])
+        self.query_terms = {}
 
     def save_query_terms(self, terms: str) -> int:
-        print(self)
-        return random.randint(0, 100000)
+        # Convert query terms to lower case
+        terms_lower = terms.lower()
 
+        # Store the lower-cased query terms and their counts in query_terms dictionary
+        if terms_lower in self.query_terms:
+            self.query_terms[terms_lower] += 1
+        else:
+            self.query_terms[terms_lower] = 1
+
+        return random.randint(0, 100000)
 
 class ClickedDoc:
     def __init__(self, doc_id, description, counter):
@@ -29,8 +32,11 @@ class ClickedDoc:
         self.counter = counter
 
     def to_json(self):
-        return self.__dict__
-
+        return {
+            'doc_id': self.doc_id,
+            'description': self.description,
+            'counter': self.counter
+        }
     def __str__(self):
         """
         Print the object content as a JSON string

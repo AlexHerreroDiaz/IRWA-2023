@@ -112,7 +112,7 @@ def rank_documents(terms, docs, index_d, idf, tf, title_index):
         if term not in index_d:
             continue
 
-        # TODO: check how to vectorize the query
+        # check how to vectorize the query
         # query_vector[termIndex]=idf[term]  # original
         ## Compute tf*idf(normalize TF as done with documents)
         query_vector[termIndex] = query_terms_count[term] / query_norm * idf[term]
@@ -127,7 +127,7 @@ def rank_documents(terms, docs, index_d, idf, tf, title_index):
 
             #tf[term][0] will contain the tf of the term "term" in the doc 26
             if doc in docs:
-                doc_vectors[doc][termIndex] = tf[term][doc_index] * idf[term]  # TODO: check if multiply for idf
+                doc_vectors[doc][termIndex] = tf[term][doc_index] * idf[term]  # check if multiply for idf
 
     # Calculate the score of each doc
     # compute the cosine similarity between queyVector and each docVector:

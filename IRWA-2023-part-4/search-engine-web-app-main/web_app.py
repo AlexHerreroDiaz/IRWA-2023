@@ -142,18 +142,27 @@ def stats():
 @app.route('/dashboard', methods=['GET'])
 def dashboard():
     visited_docs = []
-    print(analytics_data.fact_clicks.keys())
     for doc_id in analytics_data.fact_clicks.keys():
         d: Document = corpus[int(doc_id)]
         doc = ClickedDoc(doc_id, d.description, analytics_data.fact_clicks[doc_id])
         visited_docs.append(doc)
 
-    # simulate sort by ranking
-    visited_docs.sort(key=lambda doc: doc.counter, reverse=True)
+    # Convert ClickedDoc instances to dictionaries
+    visited_docs_serializable = [doc.to_json() for doc in visited_docs]
 
-    for doc in visited_docs: print(doc)
-    return render_template('dashboard.html', visited_docs=visited_docs)
+    # Simulate sort by ranking
+    visited_docs_serializable.sort(key=lambda doc: doc['counter'], reverse=True)
 
+    # Calculate the ranking of query prompts
+    query_ranking = {}
+    for query in analytics_data.query_terms:
+        count = analytics_data.query_terms[query]
+        query_ranking[query] = count
+
+    # Sort query_ranking by count in descending order
+    query_ranking = {k: v for k, v in sorted(query_ranking.items(), key=lambda item: item[1], reverse=True)}
+
+    return render_template('dashboard.html', visited_docs=visited_docs_serializable, query_ranking=query_ranking)
 
 @app.route('/sentiment')
 def sentiment_form():

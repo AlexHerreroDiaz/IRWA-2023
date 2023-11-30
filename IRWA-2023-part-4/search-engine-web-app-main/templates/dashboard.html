@@ -1,3 +1,4 @@
+
 {% extends "base.html" %}
 {% block page_title %}{{ page_title }}{% endblock %}
 
@@ -10,7 +11,55 @@
 
 {% block content %}
 
-    <!--
+    <!-- Display user information -->
+    <h3>User Information:</h3>
+    <p><strong>Browser/OS Platform/Device Info:</strong> <span id="user-agent-info"></span></p>
+    <p><strong>IP Address:</strong> <span id="ip-info"></span></p>
+    <p><strong>City:</strong> <span id="city-info"></span></p>
+    <p><strong>Date and Time:</strong> <span id="date-time-info"></span></p>
+
+    <!-- JavaScript to fetch and display user information -->
+    <script>
+        const userAgent = navigator.userAgent;
+        document.getElementById("user-agent-info").innerText = userAgent;
+
+        // Fetch user's IP address
+        fetch('https://api.ipify.org?format=json')
+            .then(response => response.json())
+            .then(data => {
+                const userIP = data.ip;
+                document.getElementById("ip-info").innerText = userIP;
+
+                // Fetch user's city based on IP address
+                fetch(`https://ipapi.co/${userIP}/json/`)
+                    .then(response => response.json())
+                    .then(data => {
+                        const userCity = data.city || 'Unknown';
+                        document.getElementById("city-info").innerText = userCity;
+                    })
+                    .catch(error => {
+                        console.error('Error fetching city:', error);
+                        document.getElementById("city-info").innerText = 'Error fetching city';
+                    });
+            })
+            .catch(error => {
+                console.error('Error fetching IP address:', error);
+                document.getElementById("ip-info").innerText = 'Error fetching IP address';
+            });
+
+        // Display date and time when the user logged in
+        const currentTime = new Date().toLocaleString();
+        document.getElementById("date-time-info").innerText = currentTime;
+    </script>
+
+    <!-- Display ranking of query prompts -->
+    <h3>Ranking of Query Prompts:</h3>
+    <ol>
+        {% for query, count in query_ranking.items() %}
+            <li>{{ query }} - {{ count }} times</li>
+        {% endfor %}
+    </ol>
+      <!--
     Examples of what to show in Dashboard:
 
     - Ranking of visited documents (from results page)
@@ -30,7 +79,7 @@
         console.log(visits_list)
     </script>
 
-    <h5>Ranking of Visited Documents</h5>
+    <h3>Ranking of Visited Documents</h5>
     <canvas id="dailyVisits" width="400" height="400"></canvas>
 
 
@@ -68,7 +117,7 @@
     </script>
 
     <hr>
-    <h5>Print Python data for verification with graph above...</h5>
+    <h3>Document visits ranking...</h5>
     {% for doc in visited_docs %}
         <div class="pb-3">
             <div class="">

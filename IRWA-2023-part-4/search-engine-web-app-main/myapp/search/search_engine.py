@@ -44,7 +44,8 @@ class SearchEngine:
 
         for count, index_d in enumerate(results):
             item: Document = ll[index_d]
-            res.append(ResultItem(item.id, item.title, item.description, item.doc_date, item.url, scores[count]))
+            res.append(ResultItem(item.id, item.title, item.description, item.doc_date, 
+                                  "doc_details?id={}&search_id={}&param2=2".format(item.id, search_id), scores[count]))
 
         # simulate sort by ranking
         res.sort(key=lambda doc: doc.ranking, reverse=True)
