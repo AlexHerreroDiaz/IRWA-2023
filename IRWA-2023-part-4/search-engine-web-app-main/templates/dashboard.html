@@ -15,6 +15,7 @@
     <h3>User Information:</h3>
     <p><strong>Browser/OS Platform/Device Info:</strong> <span id="user-agent-info"></span></p>
     <p><strong>IP Address:</strong> <span id="ip-info"></span></p>
+    <p><strong>Country:</strong> <span id="country-info"></span></p>
     <p><strong>City:</strong> <span id="city-info"></span></p>
     <p><strong>Date and Time:</strong> <span id="date-time-info"></span></p>
 
@@ -30,16 +31,19 @@
                 const userIP = data.ip;
                 document.getElementById("ip-info").innerText = userIP;
 
-                // Fetch user's city based on IP address
+                // Fetch user's city and country based on IP address
                 fetch(`https://ipapi.co/${userIP}/json/`)
                     .then(response => response.json())
                     .then(data => {
                         const userCity = data.city || 'Unknown';
+                        const userCountry = data.country_name || 'Unknown';
                         document.getElementById("city-info").innerText = userCity;
+                        document.getElementById("country-info").innerText = userCountry;
                     })
                     .catch(error => {
-                        console.error('Error fetching city:', error);
+                        console.error('Error fetching city and country:', error);
                         document.getElementById("city-info").innerText = 'Error fetching city';
+                        document.getElementById("country-info").innerText = 'Error fetching country';
                     });
             })
             .catch(error => {
@@ -53,7 +57,7 @@
     </script>
 
     <!-- Display ranking of query prompts -->
-    <h3>Ranking of Query Prompts:</h3>
+    <h3>Ranking of Query Terms:</h3>
     <ol>
         {% for query, count in query_ranking.items() %}
             <li>{{ query }} - {{ count }} times</li>

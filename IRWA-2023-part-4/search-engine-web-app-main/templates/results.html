@@ -6,7 +6,7 @@
     {% for item in results_list %}
         <div class="pb-3">
             <div class="doc-title">
-                <a href="{{ item.url }}">{{ item.title }}...
+                <a href="{{ item.doc_info }}">{{ item.title }}...
                 </a>
             </div>
             <div class="cited">
@@ -14,6 +14,10 @@
             </div>
             <div class="doc-desc">
                 {{ item.doc_date }} — {{ item.description }}
+            </div>
+            <!-- Display likes and retweets -->
+            <div class="likes-retweets">
+                Likes: {{ item.likes }} | Retweets: {{ item.retweets }}
             </div>
 
         </div>

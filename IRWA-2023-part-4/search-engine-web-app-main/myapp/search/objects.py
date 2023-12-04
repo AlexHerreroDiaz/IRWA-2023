@@ -47,10 +47,14 @@ class StatsDocument:
 
 
 class ResultItem:
-    def __init__(self, id, title, description, doc_date, url, ranking):
+    def __init__(self, id, title, description, doc_date, doc_info, url, likes, retweets, ranking):
         self.id = id
         self.title = title
         self.description = description
         self.doc_date = doc_date
+        self.doc_info = doc_info
         self.url = url
+        self.likes = likes
+        self.retweets = retweets
         self.ranking = ranking
+        

@@ -1,6 +1,8 @@
 import json
 import random
 
+from myapp.search.algorithms import build_terms
+
 
 class AnalyticsData:
     """
@@ -14,15 +16,20 @@ class AnalyticsData:
         self.query_terms = {}
 
     def save_query_terms(self, terms: str) -> int:
-        # Convert query terms to lower case
-        terms_lower = terms.lower()
-
-        # Store the lower-cased query terms and their counts in query_terms dictionary
-        if terms_lower in self.query_terms:
-            self.query_terms[terms_lower] += 1
-        else:
-            self.query_terms[terms_lower] = 1
-
+        # Tokenize the input terms using NLTK's word_tokenize or built_terms function
+        tokens, _ = build_terms(terms)  # You can also use build_terms function here
+        
+        # Store individual tokens in the query_terms dictionary
+        for token in tokens:
+            # Convert token to lowercase for uniformity
+            token = token.lower()
+            
+            # Check if the token exists in query_terms, if yes, increment count, else add it
+            if token in self.query_terms:
+                self.query_terms[token] += 1
+            else:
+                self.query_terms[token] = 1
+        
         return random.randint(0, 100000)
 
 class ClickedDoc:
